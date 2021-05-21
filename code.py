@@ -5,6 +5,16 @@ from functools import partial
 from pyDOE2 import *
 from time import time
 
+def timeit(func):
+    def wrapper(*args, **kwargs):
+        start = time()
+        result = func(*args, **kwargs)
+        end = (time() - start) * 1000
+        print('Час виконання: {end:.3f} мс')
+        return result
+
+    return wrapper
+
 def regression(x, b):
     y = sum([x[i] * b[i] for i in range(len(x))])
     return y
@@ -189,6 +199,7 @@ def check(X, Y, B, n, m):
         m += 1
         main(n, m)
 
+    time1 = time.time()
     ts = kriteriy_studenta(X[:, 1:], Y, y_aver, n, m)
     print('\nКритерій Стьюдента:\n', ts)
     res = [t for t in ts if t > t_student]
@@ -231,17 +242,10 @@ def main(n, m):
 
     check(X5_norm, Y5, B5, n, m)
     
-
-def timeit(func):
-    def wrapper(*args, **kwargs):
-        start = time()
-        result = func(*args, **kwargs)
-        end = (time() - start) * 1000
-        print('Час виконання: {end:.3f} мс')
-        return result
-
-    return wrapper
-    
+time2 = time.time()
+        if (time2 - time1) > 0.1:
+            print("Модель неадекватна")
+       
    
 if __name__ == '__main__':
     main(15, 3)
