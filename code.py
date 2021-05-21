@@ -231,15 +231,6 @@ def main(n, m):
 
     check(X5_norm, Y5, B5, n, m)
     
-def timeit(func):
-    def wrapper(*args, **kwargs):
-        start = time()
-        result = func(*args, **kwargs)
-        end = (time() - start) * 1000
-        print('Час виконання: {end:.3f} мс')
-        return result
-
-    return wrapper
 
 if __name__ == '__main__':
     main(15, 3)
