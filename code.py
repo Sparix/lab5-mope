@@ -236,7 +236,7 @@ def timeit(func):
         start = time()
         result = func(*args, **kwargs)
         end = (time() - start) * 1000
-        print(f'Час виконання: {end:.3f} мс')
+        print('Час виконання: {end:.3f} мс')
         return result
 
     return wrapper
