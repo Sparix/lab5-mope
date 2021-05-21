@@ -5,18 +5,6 @@ from functools import partial
 from pyDOE2 import *
 from time import time
 
-
-def timeit(func):
-    def wrapper(*args, **kwargs):
-        start = time()
-        result = func(*args, **kwargs)
-        end = (time() - start) * 1000
-        print(f'Час виконання: {end:.3f} мс')
-        return result
-
-    return wrapper
-
-
 def regression(x, b):
     y = sum([x[i] * b[i] for i in range(len(x))])
     return y
@@ -242,7 +230,16 @@ def main(n, m):
     B5 = find_coef(X5, y5_aver)
 
     check(X5_norm, Y5, B5, n, m)
+    
+def timeit(func):
+    def wrapper(*args, **kwargs):
+        start = time()
+        result = func(*args, **kwargs)
+        end = (time() - start) * 1000
+        print(f'Час виконання: {end:.3f} мс')
+        return result
 
+    return wrapper
 
 if __name__ == '__main__':
     main(15, 3)
